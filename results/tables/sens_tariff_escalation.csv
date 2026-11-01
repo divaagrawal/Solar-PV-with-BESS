@@ -1,0 +1,10 @@
+family,case,value,scenario,status,pv_kwp,battery_kwh,annualized_total_cost_rs,annual_grid_cost_rs,capex_total_rs,npv_vs_grid_only_rs,simple_payback_years,discounted_payback_years,lifecycle_cost_pv_rs,battery_advantage_vs_pv_only_rs
+tariff_escalation,tariff_escalation_fraction,0.0,A: grid only,optimal,0.0,0.0,2540933,2540933,0,0,,,21632397,
+tariff_escalation,tariff_escalation_fraction,0.0,B: PV only,optimal,35.0,0.0,2232267,2033473,1590750,2627853,3.25,4.12,19004545,
+tariff_escalation,tariff_escalation_fraction,0.0,C: PV + battery,optimal,35.0,-0.0,2232267,2033473,1590750,2627853,3.25,4.12,19004545,0.0
+tariff_escalation,tariff_escalation_fraction,0.03,A: grid only,optimal,0.0,0.0,3119017,2540933,0,0,,,26553953,
+tariff_escalation,tariff_escalation_fraction,0.03,B: PV only,optimal,35.0,0.0,2694899,2033473,1590750,3610758,3.14,3.92,22943196,
+tariff_escalation,tariff_escalation_fraction,0.03,C: PV + battery,optimal,35.0,-0.0,2694899,2033473,1590750,3610758,3.14,3.92,22943196,0.0
+tariff_escalation,tariff_escalation_fraction,0.05,A: grid only,optimal,0.0,0.0,3614937,2540933,0,0,,,30775998,
+tariff_escalation,tariff_escalation_fraction,0.05,B: PV only,optimal,35.0,0.0,3091777,2033473,1590750,4453960,3.08,3.8,26322037,
+tariff_escalation,tariff_escalation_fraction,0.05,C: PV + battery,optimal,35.0,-0.0,3091777,2033473,1590750,4453960,3.08,3.8,26322037,0.0

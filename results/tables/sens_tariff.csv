@@ -1,0 +1,10 @@
+family,case,value,scenario,status,pv_kwp,battery_kwh,annualized_total_cost_rs,annual_grid_cost_rs,capex_total_rs,npv_vs_grid_only_rs,simple_payback_years,discounted_payback_years,lifecycle_cost_pv_rs,battery_advantage_vs_pv_only_rs
+tariff,tariff_scale,0.7,A: grid only,optimal,0.0,0.0,1778653,1778653,0,0,,,15142678,
+tariff,tariff_scale,0.7,B: PV only,optimal,35.0,0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,
+tariff,tariff_scale,0.7,C: PV + battery,optimal,35.0,-0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,0.0
+tariff,tariff_scale,1.0,A: grid only,optimal,0.0,0.0,2540933,2540933,0,0,,,21632397,
+tariff,tariff_scale,1.0,B: PV only,optimal,35.0,0.0,2232267,2033473,1590750,2627853,3.25,4.12,19004545,
+tariff,tariff_scale,1.0,C: PV + battery,optimal,35.0,-0.0,2232267,2033473,1590750,2627853,3.25,4.12,19004545,0.0
+tariff,tariff_scale,1.3,A: grid only,optimal,0.0,0.0,3303213,3303213,0,0,,,28122117,
+tariff,tariff_scale,1.3,B: PV only,optimal,35.0,0.0,2842308,2643514,1590750,3923942,2.48,2.99,24198174,
+tariff,tariff_scale,1.3,C: PV + battery,optimal,35.0,-0.0,2842308,2643514,1590750,3923942,2.48,2.99,24198174,0.0

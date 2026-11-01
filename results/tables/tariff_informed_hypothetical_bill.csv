@@ -1,0 +1,4 @@
+scenario,status,pv_kwp,battery_kwh,annual_energy_and_wheeling_rs,annual_demand_charge_rs,annual_bill_before_fac_duty_tax_rs,npv_vs_grid_only_rs,assumed_pf,hypothetical_contract_demand_kva,demand_billing_basis,fac_duty_tax_included,grid_support_charge_included
+grid_only,optimal,0.0,0.0,3445790,428756,3874545,0,0.95,100.0,monthly maximum simulated hourly grid import / assumed PF; no contract-demand floor,False,False
+pv_only,optimal,35.0,0.0,2747364,351713,3099077,4909552,0.95,100.0,monthly maximum simulated hourly grid import / assumed PF; no contract-demand floor,False,False
+pv_battery,optimal,35.0,15.289,2722995,302746,3025741,5118453,0.95,100.0,monthly maximum simulated hourly grid import / assumed PF; no contract-demand floor,False,False

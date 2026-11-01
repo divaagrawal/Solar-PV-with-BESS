@@ -1,0 +1,147 @@
+# Base configuration for the Solar PV + BESS techno-economic model.
+#
+# Every value carries a provenance tag:
+#   [MODEL]        Hypothetical building or modelling choice (not measured data)
+#   [PLACEHOLDER]  Stand-in value until a verified source is substituted
+#   [VERIFY]       Needs a dated, citable source before any external use
+#
+# Nothing in this file is verified utility or market data yet.
+
+project:
+  name: solar-bess-optimization
+  currency: INR
+  simulation_year: 2025            # representative year, non-leap, 8760 hours
+  evaluation_years: 20             # [MODEL] project lifetime for financial analysis
+
+site:
+  name: Mumbai, Maharashtra, India
+  latitude: 19.07                  # [MODEL] city-centre coordinates
+  longitude: 72.88
+  altitude_m: 14                   # [PLACEHOLDER] approximate
+  timezone: Asia/Kolkata
+
+building:
+  type: four_storey_commercial_office     # [MODEL]
+  storeys: 4
+  floor_area_m2: 2000                     # [MODEL]
+  gross_roof_area_m2: 500                 # [MODEL]
+  usable_roof_fraction: 0.70              # [MODEL] 350 m2 usable out of 500 m2 gross
+  usable_roof_area_m2: 350
+
+pv:
+  # Area per kWp is an all-in allowance: module footprint PLUS spacing, access
+  # and shading clearance. It is applied ONCE, to the usable area. Do not also
+  # subtract setbacks from the usable area, or the allowance is double-counted.
+  area_per_kwp_m2: 10.0                   # [MODEL] all-in allowance
+  max_capacity_kwp: 35.0                  # = usable_roof_area / area_per_kwp
+  tilt_deg: 15                            # [PLACEHOLDER] near-latitude flat-roof tilt
+  azimuth_deg: 180                        # [MODEL] south-facing
+  system_loss_fraction: 0.14              # [PLACEHOLDER] DC/AC, soiling, wiring, mismatch
+  temp_coeff_per_c: -0.0035               # [PLACEHOLDER] typical crystalline silicon
+  lifetime_years: 25                      # [VERIFY]
+
+resource:
+  # NASA POWER hourly GHI (ALLSKY_SFC_SW_DWN) and T2M, 2025, site 19.07N 72.88E.
+  # Fallback: pvlib clear-sky (Ineichen) scaled by the PLACEHOLDER factors below.
+  # Mumbai has strong monsoon seasonality, so the clear-sky curve is scaled by
+  # a monthly clearness factor. These factors are PLACEHOLDERS, not measured
+  # values. Replace them with NASA POWER or PVGIS hourly GHI when available.
+  source: nasa_power                 # nasa_power | clearsky_placeholder
+  nasa_power_file: data/raw/nasa_power_mumbai_2025_hourly.csv
+  monthly_clearness_factor:               # [PLACEHOLDER]
+    1: 0.78
+    2: 0.80
+    3: 0.78
+    4: 0.75
+    5: 0.70
+    6: 0.45
+    7: 0.40
+    8: 0.42
+    9: 0.50
+    10: 0.70
+    11: 0.80
+    12: 0.80
+
+load:
+  # Synthetic hourly load. Annual energy is set by intensity times floor area.
+  # The shape is an illustrative office profile (weekday daytime peak, lower
+  # weekends and nights). Not measured consumption.
+  source: synthetic_office_profile        # [MODEL]
+  # Set source: hourly_csv only after supplying measured or utility-verified data.
+  # Required columns: timestamp and load_kwh.  Timestamps must cover this full
+  # simulation year hourly, without duplicates; values must be non-negative.
+  hourly_csv_file: null                   # [VERIFY] path to measured/utility file
+  timestamp_column: timestamp
+  load_column: load_kwh
+  annual_intensity_kwh_per_m2: 110        # [PLACEHOLDER] office electricity use intensity
+  base_load_fraction: 0.30                # [PLACEHOLDER] night and weekend share of avg load
+  random_seed: 42                         # reproducibility
+  noise_std_fraction: 0.04                # [MODEL] hour-to-hour variation
+
+tariff:
+  # Maharashtra LT-II (Non-Residential), above 50 kW, FY 2026-27.
+  #
+  # ToD structure: VERIFIED from MERC Order Case No. 75 of 2025 (25 June 2025), Table 7.
+  #   00:00-06:00  normal, 0 %
+  #   06:00-09:00  normal, 0 %
+  #   09:00-17:00  SOLAR hours, rebate -15 % (Apr-Sep) / -25 % (Oct-Mar)
+  #   17:00-24:00  PEAK hours, +25 % surcharge for LT/HT Industrial & Commercial
+  # Note: the order sets FY26 and FY27 rebates equal, and steps them up from FY28.
+  #
+  # LEGACY energy-only base, retained so that saved base-case results reproduce:
+  # Rs 12.16/kVAh from the 28 Mar 2025 MYT press note.  The later MERC
+  # review order (Case 75 of 2025, 25 Jun 2025, Annexure II p. 53) lists
+  # Rs 14.89/kVAh energy, Rs 1.52/kVAh wheeling, and Rs 550/kVA/month for
+  # LT-II(C) >50 kW in FY 2026-27.  That official schedule is modeled only
+  # by scripts/run_tariff_informed_hypothetical.py, not this legacy base.
+  structure: tod_energy_only
+  base_energy_rate_rs_per_kwh: 12.16        # legacy energy-only comparator; model is energy-only by default
+  wheeling_charge:
+    enabled: false                          # base case remains energy-only
+    rs_per_kvah: 0.0                        # set only in a separately documented tariff case
+  tod:
+    solar_hours: [9, 17]                    # start inclusive, end exclusive, local time
+    peak_hours: [17, 24]
+    solar_rebate_fraction:                  # VERIFIED, Table 7
+      apr_sep: 0.15
+      oct_mar: 0.25
+    peak_surcharge_fraction: 0.25           # VERIFIED, +25 % for LT/HT Industrial & Commercial
+  demand_charge:
+    enabled: false                          # default retains energy-only base case
+    rs_per_kva_month: 525                   # legacy press-note value; not the current tariff-informed case
+    assumed_power_factor: 1.0               # [ASSUMPTION] converts hourly kWh maximum to kVA
+  fixed_charge:
+    enabled: false                          # no separate fixed-charge figure applied to LT-II(C)
+    rs_per_month: 0.0                       # not applicable in cited >50 kW demand-charge row
+  tariff_escalation:
+    enabled: false                          # default retains constant-price base case
+    annual_fraction: 0.0                    # [ASSUMPTION] sensitivity values only
+  export_allowed: false                     # MVP constraint
+  grid_support_charge:
+    # VERIFIED: MERC Table 8 gives Rs 1.96/kWh for LT as FY 2026-27 (GSC(LT), Rs/unit).
+    # It applies to total rooftop generation, not just exports, but is only levied once
+    # Maharashtra rooftop capacity reaches 5000 MW. Rooftop systems up to 10 kW are exempt.
+    # Whether 5000 MW has been reached as of Oct 2026 is UNCONFIRMED. Off in base case.
+    enabled: false
+    rs_per_kwh: 1.96
+
+costs:
+  # Costs are sourced where marked. Currency conversion uses Rs 88.8/USD, implied by an
+  # Indian BESS tender article (Rs 1.775 lakh/MW/month = USD 1,999.45/MW/month).
+  # Replace with a dated RBI reference rate before external use.
+  pv_capex_per_kwp: 45450                   # SOURCED: Maharashtra rooftop benchmark Rs 45,450/kW (CSIS, Mar 2026)
+  pv_om_per_kwp_year: 500                   # PLACEHOLDER, no source found yet
+  battery_capex_per_kwh: 15000              # DERIVED ASSUMPTION: about USD 170/kWh system cost. Anchor is the BNEF 2025 global LFP pack average of USD 81/kWh (cited via a vendor blog, not opened directly), times an assumed system-cost factor of about 2.1. The system factor is not sourced. Sensitivity covers 3000 to 20000.
+  battery_power_capex_per_kw: 4000          # PLACEHOLDER: PCS/inverter cost, no source yet
+  battery_om_fraction_of_capex: 0.025       # SOURCED PROXY: NREL ATB 2023, fixed O&M = 2.5% of capital cost per year (US utility-scale, includes augmentation)
+  battery_life_years: 10                    # SOURCED RANGE: warranty-based base case (10 yr); NREL ATB uses 15 yr (sensitivity case)
+  cycle_degradation:
+    enabled: false                          # default remains calendar-only replacement
+    cycle_life_at_usable_depth: 6000        # PLACEHOLDER: replace with a dated warranty curve
+  battery_replacement_year: 10              # [MODEL]
+  battery_roundtrip_efficiency: 0.90        # PLACEHOLDER, one-way = sqrt(0.90)
+  battery_c_rate: 0.5                       # [MODEL] power = 0.5 x energy (2-hour battery); fixed to keep the model linear
+  battery_min_soc_fraction: 0.10            # [MODEL]
+  battery_max_soc_fraction: 0.95            # [MODEL]
+  discount_rate: 0.10                       # ASSUMPTION: base 10%; Karnataka regulator WACC 11.76% (2026, utility-scale) is a reference point; swept 6-14%
+  residual_value_fraction: 0.0              # [MODEL]

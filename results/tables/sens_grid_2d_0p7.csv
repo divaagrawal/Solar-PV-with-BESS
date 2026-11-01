@@ -1,0 +1,22 @@
+family,case,value,scenario,status,pv_kwp,battery_kwh,annualized_total_cost_rs,annual_grid_cost_rs,capex_total_rs,npv_vs_grid_only_rs,simple_payback_years,discounted_payback_years,lifecycle_cost_pv_rs,battery_advantage_vs_pv_only_rs
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=3000,A: grid only,optimal,0.0,0.0,1778653,1778653,0,0,,,15142678,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=3000,B: PV only,optimal,35.0,0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=3000,C: PV + battery,optimal,35.0,14.69,1620172,1407590,1664191,1349240,4.73,6.73,13793438,2053.0
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=5000,A: grid only,optimal,0.0,0.0,1778653,1778653,0,0,,,15142678,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=5000,B: PV only,optimal,35.0,0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=5000,C: PV + battery,optimal,35.0,-0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,0.0
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=7500,A: grid only,optimal,0.0,0.0,1778653,1778653,0,0,,,15142678,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=7500,B: PV only,optimal,35.0,0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=7500,C: PV + battery,optimal,35.0,-0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,0.0
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=10000,A: grid only,optimal,0.0,0.0,1778653,1778653,0,0,,,15142678,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=10000,B: PV only,optimal,35.0,0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=10000,C: PV + battery,optimal,35.0,-0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,0.0
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=12500,A: grid only,optimal,0.0,0.0,1778653,1778653,0,0,,,15142678,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=12500,B: PV only,optimal,35.0,0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=12500,C: PV + battery,optimal,35.0,-0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,0.0
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=15000,A: grid only,optimal,0.0,0.0,1778653,1778653,0,0,,,15142678,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=15000,B: PV only,optimal,35.0,0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=15000,C: PV + battery,optimal,35.0,-0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,0.0
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=20000,A: grid only,optimal,0.0,0.0,1778653,1778653,0,0,,,15142678,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=20000,B: PV only,optimal,35.0,0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,
+grid_2d,grid_2d,tariff=0.7;batt_energy_capex=20000,C: PV + battery,optimal,35.0,-0.0,1622225,1423431,1590750,1331763,4.71,6.69,13810915,0.0

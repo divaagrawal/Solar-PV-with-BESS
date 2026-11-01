@@ -1,0 +1,4 @@
+scenario,pv_kwp,battery_kwh,battery_kw,pv_capex_rs,battery_capex_rs,annualized_capital_om_rs,annual_grid_energy_cost_rs,annualized_total_cost_rs,grid_import_mwh,pv_generation_mwh,pv_self_consumed_pct,pv_curtailed_mwh,battery_throughput_mwh
+A: grid only,0.0,0.0,0.0,0,0,0,2540933,2540933,220.0,0.0,,0.0,0.0
+B: PV only,35.0,0.0,0.0,1590750,0,198794,2033473,2232267,169.32,51.08,99.23,0.393,0.0
+C: PV + battery,35.0,-0.0,-0.0,1590750,0,198794,2033473,2232267,169.32,51.08,99.23,0.393,0.0

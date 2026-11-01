@@ -1,0 +1,6 @@
+battery_capex_per_kwh_rs,optimal_battery_kwh,optimal_pv_kwp,annualized_total_cost_rs
+15000,-0.0,35.0,2232267
+10000,-0.0,35.0,2232267
+7500,-0.0,35.0,2232267
+5000,17.3,35.0,2228916
+3000,193.2,35.0,2185548

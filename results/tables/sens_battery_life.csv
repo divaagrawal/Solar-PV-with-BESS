@@ -1,0 +1,7 @@
+family,case,value,scenario,status,pv_kwp,battery_kwh,annualized_total_cost_rs,annual_grid_cost_rs,capex_total_rs,npv_vs_grid_only_rs,simple_payback_years,discounted_payback_years,lifecycle_cost_pv_rs,battery_advantage_vs_pv_only_rs
+battery_life,battery_life_years,10,A: grid only,optimal,0.0,0.0,2540933,2540933,0,0,,,21632397,
+battery_life,battery_life_years,10,B: PV only,optimal,35.0,0.0,2232267,2033473,1590750,2627853,3.25,4.12,19004545,
+battery_life,battery_life_years,10,C: PV + battery,optimal,35.0,-0.0,2232267,2033473,1590750,2627853,3.25,4.12,19004545,0.0
+battery_life,battery_life_years,15,A: grid only,optimal,0.0,0.0,2540933,2540933,0,0,,,21632397,
+battery_life,battery_life_years,15,B: PV only,optimal,35.0,0.0,2232267,2033473,1590750,2627853,3.25,4.12,19004545,
+battery_life,battery_life_years,15,C: PV + battery,optimal,35.0,-0.0,2232267,2033473,1590750,2627853,3.25,4.12,19004545,0.0

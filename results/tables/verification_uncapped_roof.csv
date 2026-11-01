@@ -1,0 +1,4 @@
+case,scenario,pv_kwp,battery_kwh,annualized_total_cost_rs,status
+uncapped_roof_200kWp,grid_only,0.0,0.0,2540933,optimal
+uncapped_roof_200kWp,pv_only,88.12,0.0,2001383,optimal
+uncapped_roof_200kWp,pv_battery,105.18,85.05,1980233,optimal

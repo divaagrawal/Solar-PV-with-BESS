@@ -1,0 +1,3 @@
+case,pv_kwp,annual_grid_cost_rs,annual_net_savings_rs,npv_vs_grid_only_rs,simple_payback_years,discounted_payback_years,status
+GSC off (base),35.0,2033473,489961,2627853,3.25,4.12,optimal
+GSC on,35.0,2133581,389852,1775575,4.08,5.51,optimal
